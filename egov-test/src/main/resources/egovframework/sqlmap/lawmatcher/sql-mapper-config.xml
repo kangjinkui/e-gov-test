@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias alias="egovMap" type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
+        <typeAlias alias="lawVO" type="egovframework.lawmatcher.law.vo.LawVO"/>
+        <typeAlias alias="lawSnapshotVO" type="egovframework.lawmatcher.law.vo.LawSnapshotVO"/>
+        <typeAlias alias="lawChangeVO" type="egovframework.lawmatcher.law.vo.LawChangeVO"/>
+        <typeAlias alias="lawAmendmentVO" type="egovframework.lawmatcher.law.vo.LawAmendmentVO"/>
+        <typeAlias alias="ordinanceVO" type="egovframework.lawmatcher.ordinance.vo.OrdinanceVO"/>
+        <typeAlias alias="ordinanceArticleVO" type="egovframework.lawmatcher.ordinance.vo.OrdinanceArticleVO"/>
+        <typeAlias alias="ordinanceLawMappingVO" type="egovframework.lawmatcher.ordinance.vo.OrdinanceLawMappingVO"/>
+        <typeAlias alias="amendmentReviewVO" type="egovframework.lawmatcher.review.vo.AmendmentReviewVO"/>
+        <typeAlias alias="departmentVO" type="egovframework.lawmatcher.department.vo.DepartmentVO"/>
+        <typeAlias alias="userVO" type="egovframework.lawmatcher.auth.vo.UserVO"/>
+        <typeAlias alias="roleVO" type="egovframework.lawmatcher.auth.vo.RoleVO"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="egovframework/sqlmap/auth/Auth_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/law/Law_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/law/LawSnapshot_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/law/LawChange_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/law/LawAmendment_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/ordinance/Ordinance_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/ordinance/OrdinanceArticle_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/ordinance/OrdinanceLawMapping_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/review/AmendmentReview_SQL.xml"/>
+        <mapper resource="egovframework/sqlmap/department/Department_SQL.xml"/>
+    </mappers>
+</configuration>

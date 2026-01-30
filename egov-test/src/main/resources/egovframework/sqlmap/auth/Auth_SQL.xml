@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.auth.mapper.AuthMapper">
+
+    <resultMap id="userMap" type="egovframework.lawmatcher.auth.vo.UserVO">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="enabled" column="enabled"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <resultMap id="roleMap" type="egovframework.lawmatcher.auth.vo.RoleVO">
+        <result property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+    </resultMap>
+
+    <select id="selectUserByUsername" parameterType="string" resultMap="userMap">
+        SELECT id, username, password, enabled, created_at, updated_at
+        FROM users
+        WHERE username = #{username}
+    </select>
+
+    <select id="selectRolesByUserId" parameterType="int" resultMap="roleMap">
+        SELECT r.id, r.role_name
+        FROM roles r
+        INNER JOIN user_roles ur ON ur.role_id = r.id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="egovframework.lawmatcher.auth.vo.UserVO">
+        INSERT INTO users (username, password, enabled, created_at, updated_at)
+        VALUES (#{username}, #{password}, #{enabled}, #{createdAt}, #{updatedAt})
+    </insert>
+
+</mapper>
