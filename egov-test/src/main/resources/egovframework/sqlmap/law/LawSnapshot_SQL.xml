@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.law.mapper.LawSnapshotMapper">
+
+    <resultMap id="lawSnapshotMap" type="egovframework.lawmatcher.law.vo.LawSnapshotVO">
+        <result property="id" column="id"/>
+        <result property="lawId" column="law_id"/>
+        <result property="lawMst" column="law_mst"/>
+        <result property="lawName" column="law_name"/>
+        <result property="lawType" column="law_type"/>
+        <result property="version" column="version"/>
+        <result property="content" column="content"/>
+        <result property="proclaimedDate" column="proclaimed_date"/>
+        <result property="enforcedDate" column="enforced_date"/>
+        <result property="revisionType" column="revision_type"/>
+        <result property="fetchedAt" column="fetched_at"/>
+    </resultMap>
+
+    <select id="selectLawSnapshotById" parameterType="int" resultMap="lawSnapshotMap">
+        SELECT
+            id,
+            law_id,
+            law_mst,
+            law_name,
+            law_type,
+            version,
+            content,
+            proclaimed_date,
+            enforced_date,
+            revision_type,
+            fetched_at
+        FROM law_snapshots
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectLawSnapshotList" resultMap="lawSnapshotMap">
+        SELECT
+            id,
+            law_id,
+            law_mst,
+            law_name,
+            law_type,
+            version,
+            content,
+            proclaimed_date,
+            enforced_date,
+            revision_type,
+            fetched_at
+        FROM law_snapshots
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertLawSnapshot" parameterType="egovframework.lawmatcher.law.vo.LawSnapshotVO">
+        INSERT INTO law_snapshots (
+            law_id,
+            law_mst,
+            law_name,
+            law_type,
+            version,
+            content,
+            proclaimed_date,
+            enforced_date,
+            revision_type,
+            fetched_at
+        ) VALUES (
+            #{lawId},
+            #{lawMst},
+            #{lawName},
+            #{lawType},
+            #{version},
+            #{content},
+            #{proclaimedDate},
+            #{enforcedDate},
+            #{revisionType},
+            #{fetchedAt}
+        )
+    </insert>
+
+    <update id="updateLawSnapshot" parameterType="egovframework.lawmatcher.law.vo.LawSnapshotVO">
+        UPDATE law_snapshots
+        SET
+            law_id = #{lawId},
+            law_mst = #{lawMst},
+            law_name = #{lawName},
+            law_type = #{lawType},
+            version = #{version},
+            content = #{content},
+            proclaimed_date = #{proclaimedDate},
+            enforced_date = #{enforcedDate},
+            revision_type = #{revisionType},
+            fetched_at = #{fetchedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteLawSnapshot" parameterType="int">
+        DELETE FROM law_snapshots
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

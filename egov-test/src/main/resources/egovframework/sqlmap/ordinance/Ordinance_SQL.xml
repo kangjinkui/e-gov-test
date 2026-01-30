@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.ordinance.mapper.OrdinanceMapper">
+
+    <resultMap id="ordinanceMap" type="egovframework.lawmatcher.ordinance.vo.OrdinanceVO">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="category" column="category"/>
+        <result property="department" column="department"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="enactedDate" column="enacted_date"/>
+        <result property="enforcedDate" column="enforced_date"/>
+        <result property="revisionDate" column="revision_date"/>
+        <result property="status" column="status"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="serialNo" column="serial_no"/>
+        <result property="fieldName" column="field_name"/>
+        <result property="orgName" column="org_name"/>
+        <result property="promulgationNo" column="promulgation_no"/>
+        <result property="revisionType" column="revision_type"/>
+        <result property="detailLink" column="detail_link"/>
+    </resultMap>
+
+    <select id="selectOrdinanceById" parameterType="int" resultMap="ordinanceMap">
+        SELECT
+            id,
+            code,
+            name,
+            category,
+            department,
+            department_id,
+            enacted_date,
+            enforced_date,
+            revision_date,
+            status,
+            created_at,
+            updated_at,
+            serial_no,
+            field_name,
+            org_name,
+            promulgation_no,
+            revision_type,
+            detail_link
+        FROM ordinances
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectOrdinanceList" resultMap="ordinanceMap">
+        SELECT
+            id,
+            code,
+            name,
+            category,
+            department,
+            department_id,
+            enacted_date,
+            enforced_date,
+            revision_date,
+            status,
+            created_at,
+            updated_at,
+            serial_no,
+            field_name,
+            org_name,
+            promulgation_no,
+            revision_type,
+            detail_link
+        FROM ordinances
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertOrdinance" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceVO">
+        INSERT INTO ordinances (
+            code,
+            name,
+            category,
+            department,
+            department_id,
+            enacted_date,
+            enforced_date,
+            revision_date,
+            status,
+            created_at,
+            updated_at,
+            serial_no,
+            field_name,
+            org_name,
+            promulgation_no,
+            revision_type,
+            detail_link
+        ) VALUES (
+            #{code},
+            #{name},
+            #{category},
+            #{department},
+            #{departmentId},
+            #{enactedDate},
+            #{enforcedDate},
+            #{revisionDate},
+            #{status},
+            #{createdAt},
+            #{updatedAt},
+            #{serialNo},
+            #{fieldName},
+            #{orgName},
+            #{promulgationNo},
+            #{revisionType},
+            #{detailLink}
+        )
+    </insert>
+
+    <update id="updateOrdinance" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceVO">
+        UPDATE ordinances
+        SET
+            code = #{code},
+            name = #{name},
+            category = #{category},
+            department = #{department},
+            department_id = #{departmentId},
+            enacted_date = #{enactedDate},
+            enforced_date = #{enforcedDate},
+            revision_date = #{revisionDate},
+            status = #{status},
+            created_at = #{createdAt},
+            updated_at = #{updatedAt},
+            serial_no = #{serialNo},
+            field_name = #{fieldName},
+            org_name = #{orgName},
+            promulgation_no = #{promulgationNo},
+            revision_type = #{revisionType},
+            detail_link = #{detailLink}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteOrdinance" parameterType="int">
+        DELETE FROM ordinances
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

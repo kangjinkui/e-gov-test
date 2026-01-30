@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.ordinance.mapper.OrdinanceLawMappingMapper">
+
+    <resultMap id="ordinanceLawMappingMap" type="egovframework.lawmatcher.ordinance.vo.OrdinanceLawMappingVO">
+        <result property="id" column="id"/>
+        <result property="ordinanceId" column="ordinance_id"/>
+        <result property="lawId" column="law_id"/>
+        <result property="relatedArticles" column="related_articles"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectOrdinanceLawMappingById" parameterType="int" resultMap="ordinanceLawMappingMap">
+        SELECT
+            id,
+            ordinance_id,
+            law_id,
+            related_articles,
+            created_at,
+            updated_at
+        FROM ordinance_law_mappings
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectOrdinanceLawMappingList" resultMap="ordinanceLawMappingMap">
+        SELECT
+            id,
+            ordinance_id,
+            law_id,
+            related_articles,
+            created_at,
+            updated_at
+        FROM ordinance_law_mappings
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertOrdinanceLawMapping" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceLawMappingVO">
+        INSERT INTO ordinance_law_mappings (
+            ordinance_id,
+            law_id,
+            related_articles,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{ordinanceId},
+            #{lawId},
+            #{relatedArticles},
+            #{createdAt},
+            #{updatedAt}
+        )
+    </insert>
+
+    <update id="updateOrdinanceLawMapping" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceLawMappingVO">
+        UPDATE ordinance_law_mappings
+        SET
+            ordinance_id = #{ordinanceId},
+            law_id = #{lawId},
+            related_articles = #{relatedArticles},
+            created_at = #{createdAt},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteOrdinanceLawMapping" parameterType="int">
+        DELETE FROM ordinance_law_mappings
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

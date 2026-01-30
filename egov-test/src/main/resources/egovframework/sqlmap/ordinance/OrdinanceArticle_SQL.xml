@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.ordinance.mapper.OrdinanceArticleMapper">
+
+    <resultMap id="ordinanceArticleMap" type="egovframework.lawmatcher.ordinance.vo.OrdinanceArticleVO">
+        <result property="id" column="id"/>
+        <result property="ordinanceId" column="ordinance_id"/>
+        <result property="articleNo" column="article_no"/>
+        <result property="paragraphNo" column="paragraph_no"/>
+        <result property="itemNo" column="item_no"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <select id="selectOrdinanceArticleById" parameterType="int" resultMap="ordinanceArticleMap">
+        SELECT
+            id,
+            ordinance_id,
+            article_no,
+            paragraph_no,
+            item_no,
+            content,
+            created_at
+        FROM ordinance_articles
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectOrdinanceArticleList" resultMap="ordinanceArticleMap">
+        SELECT
+            id,
+            ordinance_id,
+            article_no,
+            paragraph_no,
+            item_no,
+            content,
+            created_at
+        FROM ordinance_articles
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertOrdinanceArticle" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceArticleVO">
+        INSERT INTO ordinance_articles (
+            ordinance_id,
+            article_no,
+            paragraph_no,
+            item_no,
+            content,
+            created_at
+        ) VALUES (
+            #{ordinanceId},
+            #{articleNo},
+            #{paragraphNo},
+            #{itemNo},
+            #{content},
+            #{createdAt}
+        )
+    </insert>
+
+    <update id="updateOrdinanceArticle" parameterType="egovframework.lawmatcher.ordinance.vo.OrdinanceArticleVO">
+        UPDATE ordinance_articles
+        SET
+            ordinance_id = #{ordinanceId},
+            article_no = #{articleNo},
+            paragraph_no = #{paragraphNo},
+            item_no = #{itemNo},
+            content = #{content},
+            created_at = #{createdAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteOrdinanceArticle" parameterType="int">
+        DELETE FROM ordinance_articles
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

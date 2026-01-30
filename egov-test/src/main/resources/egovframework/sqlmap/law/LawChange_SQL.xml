@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.law.mapper.LawChangeMapper">
+
+    <resultMap id="lawChangeMap" type="egovframework.lawmatcher.law.vo.LawChangeVO">
+        <result property="id" column="id"/>
+        <result property="lawId" column="law_id"/>
+        <result property="syncDate" column="sync_date"/>
+        <result property="syncBatchId" column="sync_batch_id"/>
+        <result property="apiStatus" column="api_status"/>
+        <result property="apiMessage" column="api_message"/>
+        <result property="oldValues" column="old_values"/>
+        <result property="newValues" column="new_values"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="status" column="status"/>
+        <result property="processedAt" column="processed_at"/>
+        <result property="processedBy" column="processed_by"/>
+        <result property="processNote" column="process_note"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectLawChangeById" parameterType="int" resultMap="lawChangeMap">
+        SELECT
+            id,
+            law_id,
+            sync_date,
+            sync_batch_id,
+            api_status,
+            api_message,
+            old_values,
+            new_values,
+            dept_name,
+            dept_code,
+            status,
+            processed_at,
+            processed_by,
+            process_note,
+            created_at,
+            updated_at
+        FROM law_changes
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectLawChangeList" resultMap="lawChangeMap">
+        SELECT
+            id,
+            law_id,
+            sync_date,
+            sync_batch_id,
+            api_status,
+            api_message,
+            old_values,
+            new_values,
+            dept_name,
+            dept_code,
+            status,
+            processed_at,
+            processed_by,
+            process_note,
+            created_at,
+            updated_at
+        FROM law_changes
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertLawChange" parameterType="egovframework.lawmatcher.law.vo.LawChangeVO">
+        INSERT INTO law_changes (
+            law_id,
+            sync_date,
+            sync_batch_id,
+            api_status,
+            api_message,
+            old_values,
+            new_values,
+            dept_name,
+            dept_code,
+            status,
+            processed_at,
+            processed_by,
+            process_note,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{lawId},
+            #{syncDate},
+            #{syncBatchId},
+            #{apiStatus},
+            #{apiMessage},
+            #{oldValues},
+            #{newValues},
+            #{deptName},
+            #{deptCode},
+            #{status},
+            #{processedAt},
+            #{processedBy},
+            #{processNote},
+            #{createdAt},
+            #{updatedAt}
+        )
+    </insert>
+
+    <update id="updateLawChange" parameterType="egovframework.lawmatcher.law.vo.LawChangeVO">
+        UPDATE law_changes
+        SET
+            law_id = #{lawId},
+            sync_date = #{syncDate},
+            sync_batch_id = #{syncBatchId},
+            api_status = #{apiStatus},
+            api_message = #{apiMessage},
+            old_values = #{oldValues},
+            new_values = #{newValues},
+            dept_name = #{deptName},
+            dept_code = #{deptCode},
+            status = #{status},
+            processed_at = #{processedAt},
+            processed_by = #{processedBy},
+            process_note = #{processNote},
+            created_at = #{createdAt},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteLawChange" parameterType="int">
+        DELETE FROM law_changes
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

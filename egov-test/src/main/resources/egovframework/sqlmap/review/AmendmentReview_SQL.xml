@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.review.mapper.ReviewMapper">
+
+    <resultMap id="amendmentReviewMap" type="egovframework.lawmatcher.review.vo.AmendmentReviewVO">
+        <result property="id" column="id"/>
+        <result property="amendmentId" column="amendment_id"/>
+        <result property="ordinanceId" column="ordinance_id"/>
+        <result property="needRevision" column="need_revision"/>
+        <result property="revisionUrgency" column="revision_urgency"/>
+        <result property="affectedArticles" column="affected_articles"/>
+        <result property="reason" column="reason"/>
+        <result property="recommendation" column="recommendation"/>
+        <result property="status" column="status"/>
+        <result property="reviewedBy" column="reviewed_by"/>
+        <result property="reviewedAt" column="reviewed_at"/>
+        <result property="createdAt" column="created_at"/>
+    </resultMap>
+
+    <select id="selectAmendmentReviewById" parameterType="int" resultMap="amendmentReviewMap">
+        SELECT
+            id,
+            amendment_id,
+            ordinance_id,
+            need_revision,
+            revision_urgency,
+            affected_articles,
+            reason,
+            recommendation,
+            status,
+            reviewed_by,
+            reviewed_at,
+            created_at
+        FROM amendment_reviews
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAmendmentReviewList" resultMap="amendmentReviewMap">
+        SELECT
+            id,
+            amendment_id,
+            ordinance_id,
+            need_revision,
+            revision_urgency,
+            affected_articles,
+            reason,
+            recommendation,
+            status,
+            reviewed_by,
+            reviewed_at,
+            created_at
+        FROM amendment_reviews
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertAmendmentReview" parameterType="egovframework.lawmatcher.review.vo.AmendmentReviewVO">
+        INSERT INTO amendment_reviews (
+            amendment_id,
+            ordinance_id,
+            need_revision,
+            revision_urgency,
+            affected_articles,
+            reason,
+            recommendation,
+            status,
+            reviewed_by,
+            reviewed_at,
+            created_at
+        ) VALUES (
+            #{amendmentId},
+            #{ordinanceId},
+            #{needRevision},
+            #{revisionUrgency},
+            #{affectedArticles},
+            #{reason},
+            #{recommendation},
+            #{status},
+            #{reviewedBy},
+            #{reviewedAt},
+            #{createdAt}
+        )
+    </insert>
+
+    <update id="updateAmendmentReview" parameterType="egovframework.lawmatcher.review.vo.AmendmentReviewVO">
+        UPDATE amendment_reviews
+        SET
+            amendment_id = #{amendmentId},
+            ordinance_id = #{ordinanceId},
+            need_revision = #{needRevision},
+            revision_urgency = #{revisionUrgency},
+            affected_articles = #{affectedArticles},
+            reason = #{reason},
+            recommendation = #{recommendation},
+            status = #{status},
+            reviewed_by = #{reviewedBy},
+            reviewed_at = #{reviewedAt},
+            created_at = #{createdAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteAmendmentReview" parameterType="int">
+        DELETE FROM amendment_reviews
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

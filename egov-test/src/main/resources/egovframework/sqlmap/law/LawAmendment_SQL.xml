@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.law.mapper.LawAmendmentMapper">
+
+    <resultMap id="lawAmendmentMap" type="egovframework.lawmatcher.law.vo.LawAmendmentVO">
+        <result property="id" column="id"/>
+        <result property="lawId" column="law_id"/>
+        <result property="lawName" column="law_name"/>
+        <result property="oldSnapshotId" column="old_snapshot_id"/>
+        <result property="newSnapshotId" column="new_snapshot_id"/>
+        <result property="changeType" column="change_type"/>
+        <result property="changeSummary" column="change_summary"/>
+        <result property="detectedAt" column="detected_at"/>
+        <result property="processed" column="processed"/>
+        <result property="ordinanceId" column="ordinance_id"/>
+        <result property="sourceLawId" column="source_law_id"/>
+        <result property="sourceLawName" column="source_law_name"/>
+        <result property="sourceProclaimedDate" column="source_proclaimed_date"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectLawAmendmentById" parameterType="int" resultMap="lawAmendmentMap">
+        SELECT
+            id,
+            law_id,
+            law_name,
+            old_snapshot_id,
+            new_snapshot_id,
+            change_type,
+            change_summary,
+            detected_at,
+            processed,
+            ordinance_id,
+            source_law_id,
+            source_law_name,
+            source_proclaimed_date,
+            description,
+            status
+        FROM law_amendments
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectLawAmendmentList" resultMap="lawAmendmentMap">
+        SELECT
+            id,
+            law_id,
+            law_name,
+            old_snapshot_id,
+            new_snapshot_id,
+            change_type,
+            change_summary,
+            detected_at,
+            processed,
+            ordinance_id,
+            source_law_id,
+            source_law_name,
+            source_proclaimed_date,
+            description,
+            status
+        FROM law_amendments
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertLawAmendment" parameterType="egovframework.lawmatcher.law.vo.LawAmendmentVO">
+        INSERT INTO law_amendments (
+            law_id,
+            law_name,
+            old_snapshot_id,
+            new_snapshot_id,
+            change_type,
+            change_summary,
+            detected_at,
+            processed,
+            ordinance_id,
+            source_law_id,
+            source_law_name,
+            source_proclaimed_date,
+            description,
+            status
+        ) VALUES (
+            #{lawId},
+            #{lawName},
+            #{oldSnapshotId},
+            #{newSnapshotId},
+            #{changeType},
+            #{changeSummary},
+            #{detectedAt},
+            #{processed},
+            #{ordinanceId},
+            #{sourceLawId},
+            #{sourceLawName},
+            #{sourceProclaimedDate},
+            #{description},
+            #{status}
+        )
+    </insert>
+
+    <update id="updateLawAmendment" parameterType="egovframework.lawmatcher.law.vo.LawAmendmentVO">
+        UPDATE law_amendments
+        SET
+            law_id = #{lawId},
+            law_name = #{lawName},
+            old_snapshot_id = #{oldSnapshotId},
+            new_snapshot_id = #{newSnapshotId},
+            change_type = #{changeType},
+            change_summary = #{changeSummary},
+            detected_at = #{detectedAt},
+            processed = #{processed},
+            ordinance_id = #{ordinanceId},
+            source_law_id = #{sourceLawId},
+            source_law_name = #{sourceLawName},
+            source_proclaimed_date = #{sourceProclaimedDate},
+            description = #{description},
+            status = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteLawAmendment" parameterType="int">
+        DELETE FROM law_amendments
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.lawmatcher.law.mapper.LawMapper">
+
+    <resultMap id="lawMap" type="egovframework.lawmatcher.law.vo.LawVO">
+        <result property="id" column="id"/>
+        <result property="lawSerialNo" column="law_serial_no"/>
+        <result property="lawId" column="law_id"/>
+        <result property="lawName" column="law_name"/>
+        <result property="lawAbbr" column="law_abbr"/>
+        <result property="lawType" column="law_type"/>
+        <result property="proclaimedDate" column="proclaimed_date"/>
+        <result property="proclaimedNo" column="proclaimed_no"/>
+        <result property="enforcedDate" column="enforced_date"/>
+        <result property="revisionType" column="revision_type"/>
+        <result property="historyCode" column="history_code"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="deptCode" column="dept_code"/>
+        <result property="jointDeptInfo" column="joint_dept_info"/>
+        <result property="jointProclaimedNo" column="joint_proclaimed_no"/>
+        <result property="selfOtherLaw" column="self_other_law"/>
+        <result property="detailLink" column="detail_link"/>
+        <result property="lastSyncedAt" column="last_synced_at"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectLawById" parameterType="int" resultMap="lawMap">
+        SELECT
+            id,
+            law_serial_no,
+            law_id,
+            law_name,
+            law_abbr,
+            law_type,
+            proclaimed_date,
+            proclaimed_no,
+            enforced_date,
+            revision_type,
+            history_code,
+            dept_name,
+            dept_code,
+            joint_dept_info,
+            joint_proclaimed_no,
+            self_other_law,
+            detail_link,
+            last_synced_at,
+            created_at,
+            updated_at
+        FROM laws
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectLawList" resultMap="lawMap">
+        SELECT
+            id,
+            law_serial_no,
+            law_id,
+            law_name,
+            law_abbr,
+            law_type,
+            proclaimed_date,
+            proclaimed_no,
+            enforced_date,
+            revision_type,
+            history_code,
+            dept_name,
+            dept_code,
+            joint_dept_info,
+            joint_proclaimed_no,
+            self_other_law,
+            detail_link,
+            last_synced_at,
+            created_at,
+            updated_at
+        FROM laws
+        ORDER BY id DESC
+    </select>
+
+    <insert id="insertLaw" parameterType="egovframework.lawmatcher.law.vo.LawVO">
+        INSERT INTO laws (
+            law_serial_no,
+            law_id,
+            law_name,
+            law_abbr,
+            law_type,
+            proclaimed_date,
+            proclaimed_no,
+            enforced_date,
+            revision_type,
+            history_code,
+            dept_name,
+            dept_code,
+            joint_dept_info,
+            joint_proclaimed_no,
+            self_other_law,
+            detail_link,
+            last_synced_at,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{lawSerialNo},
+            #{lawId},
+            #{lawName},
+            #{lawAbbr},
+            #{lawType},
+            #{proclaimedDate},
+            #{proclaimedNo},
+            #{enforcedDate},
+            #{revisionType},
+            #{historyCode},
+            #{deptName},
+            #{deptCode},
+            #{jointDeptInfo},
+            #{jointProclaimedNo},
+            #{selfOtherLaw},
+            #{detailLink},
+            #{lastSyncedAt},
+            #{createdAt},
+            #{updatedAt}
+        )
+    </insert>
+
+    <update id="updateLaw" parameterType="egovframework.lawmatcher.law.vo.LawVO">
+        UPDATE laws
+        SET
+            law_serial_no = #{lawSerialNo},
+            law_id = #{lawId},
+            law_name = #{lawName},
+            law_abbr = #{lawAbbr},
+            law_type = #{lawType},
+            proclaimed_date = #{proclaimedDate},
+            proclaimed_no = #{proclaimedNo},
+            enforced_date = #{enforcedDate},
+            revision_type = #{revisionType},
+            history_code = #{historyCode},
+            dept_name = #{deptName},
+            dept_code = #{deptCode},
+            joint_dept_info = #{jointDeptInfo},
+            joint_proclaimed_no = #{jointProclaimedNo},
+            self_other_law = #{selfOtherLaw},
+            detail_link = #{detailLink},
+            last_synced_at = #{lastSyncedAt},
+            created_at = #{createdAt},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteLaw" parameterType="int">
+        DELETE FROM laws
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
