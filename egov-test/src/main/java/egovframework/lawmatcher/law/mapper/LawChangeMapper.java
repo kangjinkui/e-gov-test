@@ -1,8 +1,9 @@
 package egovframework.lawmatcher.law.mapper;
+import org.egovframe.rte.psl.dataaccess.mapper.EgovMapper;
 
 import java.util.List;
 import egovframework.lawmatcher.law.vo.LawChangeVO;
-
+@EgovMapper("lawChangeMapper")
 public interface LawChangeMapper {
     LawChangeVO selectLawChangeById(int id) throws Exception;
     List<LawChangeVO> selectLawChangeList() throws Exception;

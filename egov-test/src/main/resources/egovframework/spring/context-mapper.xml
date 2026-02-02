@@ -13,13 +13,14 @@
 				<value>classpath:/egovframework/sqlmap/ordinance/*.xml</value>
 				<value>classpath:/egovframework/sqlmap/review/*.xml</value>
 				<value>classpath:/egovframework/sqlmap/department/*.xml</value>
+				<value>classpath:/egovframework/sqlmap/example/mappers/*.xml</value>
 			</list>
 		</property>
 	</bean>
 
 	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
  	<bean class="org.egovframe.rte.psl.dataaccess.mapper.MapperConfigurer">
-		<property name="basePackage" value="egovframework.lawmatcher" />
+		<property name="basePackage" value="egovframework" />
 	</bean>
     
 </beans>
