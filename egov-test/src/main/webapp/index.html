@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법령-조례 매칭 시스템</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        .api-list { background: #f5f5f5; padding: 20px; border-radius: 5px; }
+        .endpoint { margin: 10px 0; }
+        code { background: #e0e0e0; padding: 2px 6px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <h1>법령-조례 매칭 시스템</h1>
+    <p>eGovFrame 기반 법령-조례 매칭 시스템입니다.</p>
+
+    <h2>API 엔드포인트</h2>
+    <div class="api-list">
+        <h3>법령 관리</h3>
+        <div class="endpoint"><code>GET /api/laws</code> - 법령 목록 조회</div>
+        <div class="endpoint"><code>GET /api/law-amendments</code> - 법령 개정 목록</div>
+        <div class="endpoint"><code>GET /api/law-changes</code> - 법령 변경사항</div>
+        <div class="endpoint"><code>GET /api/law-snapshots</code> - 법령 스냅샷</div>
+
+        <h3>조례 관리</h3>
+        <div class="endpoint"><code>GET /api/ordinances</code> - 조례 목록</div>
+        <div class="endpoint"><code>GET /api/ordinance-articles</code> - 조례 조항</div>
+        <div class="endpoint"><code>GET /api/ordinance-law-mappings</code> - 법령-조례 매핑</div>
+
+        <h3>기타</h3>
+        <div class="endpoint"><code>GET /api/departments</code> - 부서 목록</div>
+        <div class="endpoint"><code>GET /api/reviews</code> - 검토 목록</div>
+    </div>
+
+    <h2>초기 계정</h2>
+    <ul>
+        <li>관리자: admin / admin123 (ROLE_ADMIN)</li>
+        <li>일반 사용자: user / user123 (ROLE_USER)</li>
+    </ul>
+</body>
+</html>

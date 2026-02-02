@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 데이터베이스
+  postgres:
+    image: postgres:15-alpine
+    container_name: egov-postgres
+    environment:
+      POSTGRES_DB: egov_lawmatcher
+      POSTGRES_USER: egov_user
+      POSTGRES_PASSWORD: egov_pass123
+      TZ: Asia/Seoul
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./egov-test/src/main/resources/db:/docker-entrypoint-initdb.d
+    networks:
+      - egov-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U egov_user -d egov_lawmatcher"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # eGovFrame 애플리케이션
+  app:
+    build:
+      context: ./egov-test
+      dockerfile: Dockerfile
+    container_name: egov-app
+    environment:
+      TZ: Asia/Seoul
+      JAVA_OPTS: "-Xms512m -Xmx1024m -Dfile.encoding=UTF-8"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - egov-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  egov-network:
+    driver: bridge
