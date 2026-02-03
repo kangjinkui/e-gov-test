@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-
 const todayLabel = new Date().toLocaleDateString('ko-KR', {
   year: 'numeric',
   month: 'long',
@@ -117,17 +115,14 @@ const assignments = [
   },
 ]
 
-export default function UserDashboard() {
-  const statusTone = useMemo(
-    () => ({
-      '검토중': 'tone-info',
-      '개정 필요': 'tone-warn',
-      '검토 대기': 'tone-alert',
-      완료: 'tone-ok',
-    }),
-    [],
-  )
+const statusTone: Record<string, string> = {
+  검토중: 'tone-info',
+  '개정 필요': 'tone-warn',
+  '검토 대기': 'tone-alert',
+  완료: 'tone-ok',
+}
 
+export default function UserDashboard() {
   return (
     <div className="ud-shell">
       <header className="ud-topbar">

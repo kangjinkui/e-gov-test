@@ -57,5 +57,10 @@ logs/
 *.tar.gz
 *.rar
 
+# Node
+node_modules/
+dist/
+build/
+
 # Virtual machine crash logs
 hs_err_pid*
